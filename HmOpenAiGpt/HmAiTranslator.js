@@ -1,0 +1,1 @@
+G:/repogitory/hm_ai_translator/HmGoogleGemini/HmAiTranslator.js

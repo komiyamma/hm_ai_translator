@@ -1,45 +1,19 @@
 ﻿/*
- * HmAiTranslatorToEn v1.0.0.1
- *
- * Copyright (c) 2024 Akitsugu Komiyama
- * under the MIT License
+ * CC0 1.0 Universal
  */
 
 jsmode @"WebView2\HmOpenAiGpt";
+
+execjs currentmacrodirectory + "\\HmAiTranslator.js";
+
 js {
 
-var _globalSelectedTextOfAiTranslator = "";
 function onRequestQuestionText() {
-    return "次の「文章もしくは単語」を英語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + _globalSelectedTextOfAiTranslator;
+    return "次の「文章もしくは単語」を英語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + hidemaru.getSelectedText();
 }
 
-function onCompleteAnswerText(answer_text) {
-    answer_text = answer_text.replace(/\n+$/, '\n');
-    insert(answer_text)
-}
-
-function doMyCustomMain() {
-    _globalSelectedTextOfAiTranslator = hidemaru.getSelectedText();
-    if (_globalSelectedTextOfAiTranslator == "") {
-        let dll = loaddll(hidemaruExeDir + "\\HmOutputPane.dll");
-        dll.dllfunc.Output(hidemaru.getCurrentWindowHandle(), "選択テキストがありません\r\n");
-        return;
-    }
-
-    const targetAiMacroPath = macrodir()+"\\HmOpenAiGpt\\HmOpenAiGpt.mac";
-
-    const argobj = {
-        onRequestQuestionText: 1,
-        onCompleteAnswerText: 1
-    };
-
-    hidemaru.setTimeout(
-        () => { hidemaru.postExecMacroFile(`"${targetAiMacroPath}"`, argobj); },
-    0 );
-}
-
-doMyCustomMain();
-
+doMyCustomMain(
+    { targetAiMacroPath : macrodir()+"\\HmOpenAiGpt\\HmOpenAiGpt.mac" }
+);
 
 } // js
-
