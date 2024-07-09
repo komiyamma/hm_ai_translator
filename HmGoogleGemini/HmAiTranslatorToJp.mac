@@ -10,11 +10,12 @@ js {
 
 var _globalSelectedTextOfAiTranslator = "";
 function onRequestQuestionText() {
-    return "次の「文章もしくは単語」を日本語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + _globalSelectedTextOfAiTranslator + "\n";
+    return "次の「文章もしくは単語」を日本語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + _globalSelectedTextOfAiTranslator;
 }
 
 function onCompleteAnswerText(answer_text) {
-    insert(answer_text+"\n")
+    answer_text = answer_text.replace(/\n+$/, '\n');
+    insert(answer_text)
 }
 
 function doMyCustomMain() {
