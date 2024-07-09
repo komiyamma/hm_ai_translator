@@ -8,8 +8,9 @@
 jsmode @"WebView2\HmGoogleGemini";
 js {
 
+var _globalSelectedTextOfAiTranslator = "";
 function onRequestQuestionText() {
-    return "次の「文章もしくは単語」を日本語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + hidemaru.getSelectedText() + "\n";
+    return "次の「文章もしくは単語」を日本語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + _globalSelectedTextOfAiTranslator + "\n";
 }
 
 function onCompleteAnswerText(answer_text) {
@@ -17,6 +18,12 @@ function onCompleteAnswerText(answer_text) {
 }
 
 function doMyCustomMain() {
+    _globalSelectedTextOfAiTranslator = hidemaru.getSelectedText();
+    if (_globalSelectedTextOfAiTranslator == "") {
+        let dll = loaddll(hidemaruExeDir + "\\HmOutputPane.dll");
+        dll.dllfunc.Output(hidemaru.getCurrentWindowHandle(), "選択テキストがありません\r\n");
+        return;
+    }
 
     const targetAiMacroPath = macrodir()+"\\HmGoogleGemini\\HmGoogleGemini.mac";
 
