@@ -1,0 +1,37 @@
+﻿/*
+ * HmAiTranslatorToEn v1.0.0.1
+ *
+ * Copyright (c) 2024 Akitsugu Komiyama
+ * under the MIT License
+ */
+
+jsmode @"WebView2\HmGoogleGemini";
+js {
+
+function onRequestQuestionText() {
+    return "次の「文章もしくは単語」を英語に翻訳してください。翻訳結果のみを応答してください。\n\n---\n\n" + hidemaru.getSelectedText() + "\n";
+}
+
+function onCompleteAnswerText(answer_text) {
+    insert(answer_text+"\n")
+}
+
+function doMyCustomMain() {
+
+    const targetAiMacroPath = macrodir()+"\\HmGoogleGemini\\HmGoogleGemini.mac";
+
+    const argobj = {
+        onRequestQuestionText: 1,
+        onCompleteAnswerText: 1
+    };
+
+    hidemaru.setTimeout(
+        () => { hidemaru.postExecMacroFile(`"${targetAiMacroPath}"`, argobj); },
+    0 );
+}
+
+doMyCustomMain();
+
+
+} // js
+
