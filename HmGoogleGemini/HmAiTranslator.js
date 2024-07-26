@@ -10,18 +10,34 @@ function onRequestQuestionText() {
 
 function onCompleteAnswerText(answer_text) {
 
+    answer_text = answer_text.replace(/(\n|\r| )+$/, '\n');
+    let answer_text_array = answer_text.replaceAll("\r", "").split("\n");
+
+    // 空行をフィルタリング
+    answer_text_array = answer_text_array.filter(t => t.length > 0);
+
+    // 改行を挟んで再結合
+    answer_text = answer_text_array.join("\n");
+
     begingroupundo();
 
-    // カーソル位置が行末なら改行
-    // (行選択的なことをしている場合は、翻訳結果は次の行から開始するのが適切なため)
-    if (column_wcs() >= linelen_wcs()-1) {
-        answer_text = answer_text.replace(/(\n|\r| )+$/, '\n');
-        insert("\n" + answer_text);
+    // 行末まで選択することで、カーソルが先頭にある。
+    if (selend_wcs() == 0) {
+        // 行を翻訳するので最後に改行を入れる
+        insert(answer_text + "\n");
     }
+
+    // 文末まで選択することで行選択相当になっている。
+    else if (selend_wcs() == linelen_wcs()) {
+        // 文末に最後改行が無いので、先頭に改行を入れる
+        insert("\n" + answer_text + "\n");
+    }
+
+    // 通常の選択
     else {
-        answer_text = answer_text.replace(/(\n|\r| )+$/, '');
         insert(answer_text);
     }
+
     endgroupundo();
 }
 
