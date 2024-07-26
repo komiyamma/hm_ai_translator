@@ -27,8 +27,8 @@ function onCompleteAnswerText(answer_text) {
         insert(answer_text + "\n");
     }
 
-    // 文末まで選択することで行選択相当になっている。
-    else if (selend_wcs() == linelen_wcs()) {
+    // 文頭から文末まで選択することで行選択相当になっている。
+    else if (seltop_wcs() == 0 && selend_wcs() == linelen_wcs()) {
         // 文末に最後改行が無いので、先頭に改行を入れる
         insert("\n" + answer_text + "\n");
     }
