@@ -22,13 +22,13 @@ function onCompleteAnswerText(answer_text) {
     begingroupundo();
 
     // 行末まで選択することで、カーソルが先頭にある。
-    if (selend_wcs() == 0) {
+    if (selendx() == 0) {
         // 行を翻訳するので最後に改行を入れる
         insert(answer_text + "\n");
     }
 
     // 文頭から文末まで選択することで行選択相当になっている。
-    else if (seltop_wcs() == 0 && selend_wcs() == linelen_wcs()) {
+    else if (seltopx() == 0 && selendx() == linelen()) {
         // 文末に最後改行が無いので、先頭に改行を入れる
         insert("\n" + answer_text + "\n");
     }
