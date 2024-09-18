@@ -10,26 +10,20 @@ function onRequestQuestionText() {
 
 function onCompleteAnswerText(answer_text) {
 
-    answer_text = answer_text.replace(/(\n|\r| )+$/, '\n');
-    let answer_text_array = answer_text.replaceAll("\r", "").split("\n");
+    // 先頭付近と末尾付近の空白行を削除し、途中の空白行は有効とする
+    answer_text = answer_text.replace(/^\s*[\r\n]+|[\r\n]+\s*$/g, '');
 
-    // 実際に要素が存在する先頭の添え字は？
-    const start = answer_text_array.findIndex(el => el !== "");
-
-    // 実際に要素が存在する最後の添え字は？
-    const end = answer_text_array.length - answer_text_array.findIndex(el => el !== "") - 1;
-
-    answer_text = answer_text.slice(start, end + 1);
-
-    // 改行を挟んで再結合
-    answer_text = answer_text_array.join("\n");
+    // 改行を追加する関数
+    const ensureNewline = (text) => {
+        return text.endsWith("\n") ? text : text + "\n";
+    }
 
     begingroupundo();
 
     // 行末まで選択することで、カーソルが先頭にある。
     if (selendcolumn() == 0) {
         // 文中ではなく、文全体の塊を翻訳してほしいのだとみなすので、最後に改行を入れる。
-        answer_text = answer_text.endsWith("\n") ? answer_text : answer_text+"\n";
+        answer_text = ensureNewline(answer_text);
 
         // 行を翻訳するので最後に改行を入れる
         insert(answer_text);
@@ -39,7 +33,7 @@ function onCompleteAnswerText(answer_text) {
     else if (seltopcolumn() == 0 && selendcolumn() == linelen2()) {
 
         // 文中ではなく、文全体の塊を翻訳してほしいのだとみなすので、最後に改行を入れる。
-        answer_text = answer_text.endsWith("\n") ? answer_text : answer_text+"\n";
+        answer_text = ensureNewline(answer_text);
 
         // 文末に改行が含まれてないので、先頭に改行を入れる
         insert("\n" + answer_text);
