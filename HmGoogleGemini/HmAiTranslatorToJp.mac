@@ -9,7 +9,7 @@ execjs currentmacrodirectory + "\\HmAiTranslator.js";
 js {
 
 function onRequestQuestionText() {
-    return "次の「文章もしくは単語」を日本語に翻訳してください。\n改行をカットしないでください。\n翻訳結果のみを応答してください。\n\n#以下は全て翻訳内容\n\n" + hidemaru.getSelectedText();
+    return "次の「文章もしくは単語」を日本語に翻訳してください。\n改行をカットしないでください。\n内容がテキスト形式なら返答もテキスト形式にしてください。\n翻訳結果のみを応答してください。\n\n#以下は全て翻訳内容\n\n" + hidemaru.getSelectedText();
 }
 
 doMyCustomMain(

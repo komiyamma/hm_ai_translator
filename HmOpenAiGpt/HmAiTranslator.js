@@ -56,11 +56,11 @@ function onCompleteAnswerText(answer_text) {
 function doMyCustomMain({aiMacroPath}) {
 
     let writeLineOutputPane = (msg) => {
-        let dll = loaddll(hidemaruExeDir + "\\HmOutputPane.dll");
-        dll.dllfunc.Output(hidemaru.getCurrentWindowHandle(), msg + "\r\n");
+        let dll = loaddll("HmOutputPane.dll");
+        dll.dllFuncW.OutputW(hidemaru.getCurrentWindowHandle(), msg + "\r\n");
     }
 
-    if (hidemaru.getSelectedText() == "") {
+    if (!hidemaru.getSelectedText()) {
         writeLineOutputPane("選択テキストがありません");
         return;
     }
