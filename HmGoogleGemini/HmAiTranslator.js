@@ -1,5 +1,5 @@
 ﻿/*
- * HmAiTranslator v1.0.1.1
+ * HmAiTranslator v1.0.2.1
  *
  * Copyright (c) 2024 Akitsugu Komiyama
  * under the MIT License
