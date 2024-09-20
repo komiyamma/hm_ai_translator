@@ -8,4 +8,10 @@
 
 「秀丸エディタ」で「Google Gemini」もしくは「Open Ai GPT」を利用して、翻訳するためのマクロ
 
-https://秀丸マクロ.net/?page=nobu_tool_hm_ai_translator
+## HmOpenAiGpt版
+
+- https://秀丸マクロ.net/?page=nobu_tool_hm_openaigpt_call_trans
+
+## HmGoogleGemini版
+
+- https://秀丸マクロ.net/?page=nobu_tool_hm_googlegemini_call_trans
