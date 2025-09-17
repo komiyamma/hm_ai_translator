@@ -1,6 +1,6 @@
 # HmAiTranslator
 
-![HmAiTranslator v1.0.2](https://img.shields.io/badge/HmAiTranslator-v1.0.2-6479ff.svg)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/komiyamma/hm_ai_translator)](https://github.com/komiyamma/hm_ai_translator/releases/latest)
 [![MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 ![Hidemaru 9.25](https://img.shields.io/badge/Hidemaru-v9.25-6479ff.svg)
 ![HmOpenAiGpt v1.1.2.9](https://img.shields.io/badge/HmOpenAiGpt-v1.1.2.9-6479ff.svg)
